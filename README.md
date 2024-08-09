@@ -1,3 +1,7 @@
+<p align="center">  
+<img src="https://github.com/andygeiss/ecs/blob/master/logo.png?raw=true" />
+</p>
+
 # ECS - Example Engine
 
 [![License](https://img.shields.io/github/license/andygeiss/ecs)](https://github.com/andygeiss/ecs/blob/master/LICENSE)
@@ -8,8 +12,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/5a2fd230f2eae6f244f2/maintainability)](https://codeclimate.com/github/andygeiss/ecs/maintainability)
 
 Example for the implementation of a game engine with [ecs](https://github.com/andygeiss/ecs).
-
-[![Logo](logo.png)](logo.png)
 
 ## Install and start the engine
 
