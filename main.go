@@ -1,9 +1,8 @@
 package main
 
 import (
-	"example/components"
-	"example/systems"
-
+	"github.com/andygeiss/ecs-example/components"
+	"github.com/andygeiss/ecs-example/systems"
 	ecs "github.com/andygeiss/ecs/core"
 )
 
