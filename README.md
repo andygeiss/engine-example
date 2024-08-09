@@ -11,8 +11,9 @@ Example for the implementation of a game engine with [ecs](https://github.com/an
 
 [![Logo](logo.png)](logo.png)
 
-## Start the engine
+## Install and start the engine
 
 ```bash
+    go install github.com/andygeiss/ecs-example@latest
     go run main.go
 ```

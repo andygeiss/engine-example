@@ -1,4 +1,4 @@
-module example
+module github.com/andygeiss/ecs-example
 
 go 1.22.5
 
