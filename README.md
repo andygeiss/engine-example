@@ -16,6 +16,6 @@ Example for the implementation of a game engine with [ecs](https://github.com/an
 ## Install and start the engine
 
 ```bash
-    go install github.com/andygeiss/ecs-example@latest
-    go run github.com/andygeiss/ecs-example
+    go install github.com/andygeiss/engine-example@latest
+    go run github.com/andygeiss/engine-example
 ```
