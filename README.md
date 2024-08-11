@@ -1,4 +1,4 @@
-<p align="center">  
+<p align="center">
 <img src="https://github.com/andygeiss/ecs/blob/master/logo.png?raw=true" />
 </p>
 
@@ -16,6 +16,7 @@ Example for the implementation of a game engine with [ecs](https://github.com/an
 ## Install and start the engine
 
 ```bash
-    go install github.com/andygeiss/engine-example@latest
-    go run github.com/andygeiss/engine-example@latest
+    git clone github.com/andygeiss/engine-example.git
+    cd engine-example
+    go run main.go
 ```
