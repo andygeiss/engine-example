@@ -1,6 +1,8 @@
 package systems
 
 import (
+	"fmt"
+
 	"github.com/andygeiss/ecs-example/components"
 	ecs "github.com/andygeiss/ecs/core"
 	rl "github.com/gen2brain/raylib-go/raylib"
@@ -30,8 +32,9 @@ func (a *renderingSystem) Process(em ecs.EntityManager) (state int) {
 	if rl.IsWindowReady() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.Black)
+		rl.DrawText(fmt.Sprintf("FPS %d", rl.GetFPS()), 10, 10, 20, rl.Red)
+		rl.DrawText("Press WASD to move the Player", 240, 150, 20, rl.Yellow)
 		a.renderEntities(em)
-		rl.DrawFPS(10, 10)
 		rl.EndDrawing()
 	}
 	return ecs.StateEngineContinue

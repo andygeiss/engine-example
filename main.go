@@ -16,17 +16,18 @@ func main() {
 	em := ecs.NewEntityManager()
 	em.Add(ecs.NewEntity("player", []ecs.Component{
 		components.NewPosition().
-			WithX(10).WithY(10),
+			WithX(800/2 - 64).WithY(600/2 - 64),
 		components.NewSize().
 			WithWidth(128).WithHeight(128),
 		components.NewTexture().
 			WithPath("resources/logo.png").WithVisible(true),
 		components.NewVelocity().
-			WithX(100).WithY(100),
+			WithX(0).WithY(0),
 	}))
 	sm := ecs.NewSystemManager()
 	sm.Add(
 		systems.NewResourceSystem(em),
+		systems.NewInputSystem(),
 		systems.NewMovementSystem(),
 		systems.NewCollisionSystem().
 			WithWidth(width).WithHeight(height),
