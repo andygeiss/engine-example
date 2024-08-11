@@ -28,13 +28,16 @@ func (a *renderingSystem) Process(em ecs.EntityManager) (state int) {
 	if rl.WindowShouldClose() {
 		return ecs.StateEngineStop
 	}
-	// Clear the screen
+	// Clear the screen when the window is ready.
 	if rl.IsWindowReady() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.Black)
-		rl.DrawText(fmt.Sprintf("FPS %d", rl.GetFPS()), 10, 10, 20, rl.Red)
-		rl.DrawText("Press WASD to move the Player", 240, 150, 20, rl.Yellow)
+		// Draw the entities first.
 		a.renderEntities(em)
+		// Then draw the text over it.
+		rl.DrawText(fmt.Sprintf("FPS %d", rl.GetFPS()), 10, 10, 20, rl.Red)
+		rl.DrawText("ESC to exit", 670, 10, 20, rl.Red)
+		rl.DrawText("WASD to move", 330, 200, 20, rl.Yellow)
 		rl.EndDrawing()
 	}
 	return ecs.StateEngineContinue
