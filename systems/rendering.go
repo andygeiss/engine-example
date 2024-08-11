@@ -60,13 +60,17 @@ func (a *renderingSystem) renderEntities(em ecs.EntityManager) {
 	for _, e := range em.FilterByMask(components.MaskPosition | components.MaskSize) {
 		position := e.Get(components.MaskPosition).(*components.Position)
 		size := e.Get(components.MaskSize).(*components.Size)
-		rl.DrawRectangleRec(
-			rl.Rectangle{
-				X:      position.X,
-				Y:      position.Y,
-				Width:  size.Width,
-				Height: size.Height,
-			}, rl.Blue)
+		texture := e.Get(components.MaskTexture)
+		// Draw a bounding box
+		rl.DrawRectangleLines(int32(position.X), int32(position.Y), int32(size.Width), int32(size.Height), rl.Red)
+		// Draw a texture, if available
+		if texture != nil {
+			tx := texture.(*components.Texture)
+			if !tx.Visible {
+				continue
+			}
+			rl.DrawTexture(*tx.Tex, int32(position.X), int32(position.Y), rl.White)
+		}
 	}
 }
 
