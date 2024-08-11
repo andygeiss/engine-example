@@ -3,8 +3,8 @@ package systems
 import (
 	"fmt"
 
-	"github.com/andygeiss/ecs-example/components"
 	ecs "github.com/andygeiss/ecs/core"
+	"github.com/andygeiss/engine-example/components"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 

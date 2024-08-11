@@ -3,9 +3,9 @@ package main
 import (
 	"embed"
 
-	"github.com/andygeiss/ecs-example/components"
-	"github.com/andygeiss/ecs-example/systems"
 	ecs "github.com/andygeiss/ecs/core"
+	"github.com/andygeiss/engine-example/components"
+	"github.com/andygeiss/engine-example/systems"
 )
 
 //go:embed resources/**
