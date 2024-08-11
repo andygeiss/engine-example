@@ -2,7 +2,7 @@
 <img src="https://github.com/andygeiss/ecs/blob/master/logo.png?raw=true" />
 </p>
 
-# ECS - Example Engine
+# Example Engine
 
 [![License](https://img.shields.io/github/license/andygeiss/ecs)](https://github.com/andygeiss/ecs/blob/master/LICENSE)
 [![Releases](https://img.shields.io/github/v/release/andygeiss/ecs)](https://github.com/andygeiss/ecs/releases)
