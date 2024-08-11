@@ -30,10 +30,8 @@ func main() {
 		systems.NewResourceSystem(em),
 		systems.NewInputSystem(),
 		systems.NewMovementSystem(),
-		systems.NewCollisionSystem().
-			WithWidth(width).WithHeight(height),
-		systems.NewRenderingSystem().
-			WithWidth(width).WithHeight(height),
+		systems.NewCollisionSystem().WithWidth(width).WithHeight(height),
+		systems.NewRenderingSystem().WithWidth(width).WithHeight(height),
 	)
 	de := ecs.NewDefaultEngine(em, sm)
 	de.Setup()
