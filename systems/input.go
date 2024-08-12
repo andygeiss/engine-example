@@ -14,10 +14,9 @@ func (a *inputSystem) Process(em ecs.EntityManager) (state int) {
 	controls := em.Get("controls")
 	controlsState := controls.Get(components.MaskState).(*components.State)
 	// Handle player input
-	a.handleKeyDown(87, controlsState) // W
-	a.handleKeyDown(65, controlsState) // A
-	a.handleKeyDown(83, controlsState) // S
-	a.handleKeyDown(68, controlsState) // D
+	for key, _ := range a.keyMap {
+		a.handleKeyDown(key, controlsState)
+	}
 	return ecs.StateEngineContinue
 }
 
