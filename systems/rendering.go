@@ -37,15 +37,24 @@ func (a *renderingSystem) Process(em ecs.EntityManager) (state int) {
 		// Then draw the text over it.
 		controls := em.Get("controls")
 		controlsState := controls.Get(components.MaskState).(*components.State)
-		switch controlsState.Value {
-		case components.StateControlsW:
+		player := em.Get("player")
+		playerPosition := player.Get(components.MaskPosition).(*components.Position)
+		playerState := player.Get(components.MaskState).(*components.State)
+		switch {
+		case controlsState.HasState(components.StateControlsW):
 			rl.DrawText("UP", 70, 510, 20, rl.Red)
-		case components.StateControlsA:
+		case controlsState.HasState(components.StateControlsA):
 			rl.DrawText("LEFT", 10, 540, 20, rl.Red)
-		case components.StateControlsS:
+		case controlsState.HasState(components.StateControlsS):
 			rl.DrawText("DOWN", 55, 570, 20, rl.Red)
-		case components.StateControlsD:
+		case controlsState.HasState(components.StateControlsD):
 			rl.DrawText("RIGHT", 100, 540, 20, rl.Red)
+		}
+		switch {
+		case playerState.HasState(components.StatePlayerMove):
+			rl.DrawText("MOVING", int32(playerPosition.X), int32(playerPosition.Y)-20, 20, rl.Red)
+		case playerState.HasState(components.StatePlayerIdle):
+			rl.DrawText("IDLE", int32(playerPosition.X), int32(playerPosition.Y)-20, 20, rl.Red)
 		}
 		rl.DrawText(fmt.Sprintf("FPS %d", rl.GetFPS()), 10, 10, 20, rl.Red)
 		rl.DrawText("ESC to exit", 670, 10, 20, rl.Red)

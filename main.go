@@ -37,6 +37,7 @@ func main() {
 		systems.NewMovementSystem(),
 		systems.NewCollisionSystem().WithWidth(width).WithHeight(height),
 		systems.NewRenderingSystem().WithWidth(width).WithHeight(height),
+		systems.NewStateSystem(),
 	)
 	de := ecs.NewDefaultEngine(em, sm)
 	de.Setup()

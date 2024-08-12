@@ -10,12 +10,16 @@ type inputSystem struct {
 	keyMap map[int32]uint64
 }
 
-func (a *inputSystem) Process(em ecs.EntityManager) (state int) {
-	controls := em.Get("controls")
-	controlsState := controls.Get(components.MaskState).(*components.State)
+func (a *inputSystem) Process(em ecs.EntityManager) (engineState int) {
+	e := em.Get("controls")
+	state := e.Get(components.MaskState).(*components.State)
 	// Handle player input
 	for key, _ := range a.keyMap {
-		a.handleKeyDown(key, controlsState)
+		if rl.IsKeyDown(key) {
+			state.Set(a.keyMap[key], 0)
+		} else {
+			state.Remove(a.keyMap[key], 0)
+		}
 	}
 	return ecs.StateEngineContinue
 }
@@ -23,14 +27,6 @@ func (a *inputSystem) Process(em ecs.EntityManager) (state int) {
 func (a *inputSystem) Setup() {}
 
 func (a *inputSystem) Teardown() {}
-
-func (a *inputSystem) handleKeyDown(key int32, state *components.State) {
-	if rl.IsKeyDown(key) {
-		state.Set(a.keyMap[key])
-	} else {
-		state.Remove(a.keyMap[key])
-	}
-}
 
 func NewInputSystem() ecs.System {
 	return &inputSystem{
