@@ -21,9 +21,7 @@ func (a *stateSystem) Process(em ecs.EntityManager) (state int) {
 		controlsState.HasState(components.StateControlsS) ||
 		controlsState.HasState(components.StateControlsD) {
 		playerState.Set(components.StatePlayerMove, 0)
-		playerState.Remove(components.StatePlayerIdle, 0)
 	} else {
-		playerState.Set(components.StatePlayerIdle, 0)
 		playerState.Remove(components.StatePlayerMove, 0)
 	}
 	return ecs.StateEngineContinue

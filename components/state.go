@@ -13,8 +13,8 @@ const (
 )
 
 const (
-	StatePlayerIdle = uint64(1 << 0)
-	StatePlayerMove = uint64(1 << 1)
+	StatePlayerIdle = uint64(0)
+	StatePlayerMove = uint64(1 << 0)
 )
 
 type State struct {
