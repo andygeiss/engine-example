@@ -58,7 +58,7 @@ func (a *renderingSystem) Process(em ecs.EntityManager) (state int) {
 		}
 		rl.DrawText(fmt.Sprintf("FPS %d", rl.GetFPS()), 10, 10, 20, rl.Red)
 		rl.DrawText("ESC to exit", 670, 10, 20, rl.Red)
-		rl.DrawText("WASD to move", 330, 200, 20, rl.Yellow)
+		rl.DrawText("WASD to move", 330, 10, 20, rl.Yellow)
 		rl.EndDrawing()
 	}
 	return ecs.StateEngineContinue
