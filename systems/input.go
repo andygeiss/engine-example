@@ -27,9 +27,9 @@ func (a *inputSystem) Teardown() {}
 
 func (a *inputSystem) handleKeyDown(key int32, state *components.State) {
 	if rl.IsKeyDown(key) {
-		state.Value |= a.keyMap[key]
+		state.Set(a.keyMap[key])
 	} else {
-		state.Value &= ^a.keyMap[key]
+		state.Remove(a.keyMap[key])
 	}
 }
 

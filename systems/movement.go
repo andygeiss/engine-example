@@ -16,19 +16,19 @@ func (a *movementSystem) Process(em ecs.EntityManager) (state int) {
 		velocity := e.Get(components.MaskVelocity).(*components.Velocity)
 		// Set the velocity based on the player's input.
 		if controlsState.Value > 0 {
-			if controlsState.Value&components.StateControlsW > 0 {
+			if controlsState.HasState(components.StateControlsW) {
 				velocity.X = 0
 				velocity.Y = -100
 			}
-			if controlsState.Value&components.StateControlsA > 0 {
+			if controlsState.HasState(components.StateControlsA) {
 				velocity.X = -100
 				velocity.Y = 0
 			}
-			if controlsState.Value&components.StateControlsS > 0 {
+			if controlsState.HasState(components.StateControlsS) {
 				velocity.X = 0
 				velocity.Y = 100
 			}
-			if controlsState.Value&components.StateControlsD > 0 {
+			if controlsState.HasState(components.StateControlsD) {
 				velocity.X = 100
 				velocity.Y = 0
 			}
