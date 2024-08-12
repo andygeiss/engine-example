@@ -6,25 +6,18 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-type inputSystem struct{}
+type inputSystem struct {
+	keyMap map[int32]uint64
+}
 
 func (a *inputSystem) Process(em ecs.EntityManager) (state int) {
+	controls := em.Get("controls")
+	controlsState := controls.Get(components.MaskState).(*components.State)
 	// Handle player input
-	e := em.Get("player")
-	velocity := e.Get(components.MaskVelocity).(*components.Velocity)
-	// Handle player input
-	if key := rl.GetKeyPressed(); key != 0 {
-		switch key {
-		case 87: // W
-			velocity.X, velocity.Y = 0, -100
-		case 65: // A
-			velocity.X, velocity.Y = -100, 0
-		case 83: // S
-			velocity.X, velocity.Y = 0, 100
-		case 68: // D
-			velocity.X, velocity.Y = 100, 0
-		}
-	}
+	a.handleKeyDown(87, controlsState) // W
+	a.handleKeyDown(65, controlsState) // A
+	a.handleKeyDown(83, controlsState) // S
+	a.handleKeyDown(68, controlsState) // D
 	return ecs.StateEngineContinue
 }
 
@@ -32,6 +25,21 @@ func (a *inputSystem) Setup() {}
 
 func (a *inputSystem) Teardown() {}
 
+func (a *inputSystem) handleKeyDown(key int32, state *components.State) {
+	if rl.IsKeyDown(key) {
+		state.Value |= a.keyMap[key]
+	} else {
+		state.Value &= ^a.keyMap[key]
+	}
+}
+
 func NewInputSystem() ecs.System {
-	return &inputSystem{}
+	return &inputSystem{
+		keyMap: map[int32]uint64{
+			87: components.StateControlsW,
+			65: components.StateControlsA,
+			83: components.StateControlsS,
+			68: components.StateControlsD,
+		},
+	}
 }

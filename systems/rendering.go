@@ -35,6 +35,18 @@ func (a *renderingSystem) Process(em ecs.EntityManager) (state int) {
 		// Draw the entities first.
 		a.renderEntities(em)
 		// Then draw the text over it.
+		controls := em.Get("controls")
+		controlsState := controls.Get(components.MaskState).(*components.State)
+		switch controlsState.Value {
+		case components.StateControlsW:
+			rl.DrawText("UP", 70, 510, 20, rl.Red)
+		case components.StateControlsA:
+			rl.DrawText("LEFT", 10, 540, 20, rl.Red)
+		case components.StateControlsS:
+			rl.DrawText("DOWN", 55, 570, 20, rl.Red)
+		case components.StateControlsD:
+			rl.DrawText("RIGHT", 100, 540, 20, rl.Red)
+		}
 		rl.DrawText(fmt.Sprintf("FPS %d", rl.GetFPS()), 10, 10, 20, rl.Red)
 		rl.DrawText("ESC to exit", 670, 10, 20, rl.Red)
 		rl.DrawText("WASD to move", 330, 200, 20, rl.Yellow)
