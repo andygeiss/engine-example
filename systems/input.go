@@ -14,7 +14,7 @@ func (a *inputSystem) Process(em ecs.EntityManager) (engineState int) {
 	e := em.Get("controls")
 	state := e.Get(components.MaskState).(*components.State)
 	// Handle player input
-	for key, _ := range a.keyMap {
+	for key := range a.keyMap {
 		if rl.IsKeyDown(key) {
 			state.Set(a.keyMap[key], 0)
 		} else {
