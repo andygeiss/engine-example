@@ -3,7 +3,7 @@ package systems
 import (
 	ecs "github.com/andygeiss/ecs/core"
 	"github.com/andygeiss/engine-example/components"
-	rl "github.com/gen2brain/raylib-go/raylib"
+	rl "github.com/andygeiss/engine-example/platform/raylib"
 )
 
 type resourceSystem struct {
