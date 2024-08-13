@@ -5,7 +5,7 @@ import (
 
 	ecs "github.com/andygeiss/ecs/core"
 	"github.com/andygeiss/engine-example/components"
-	rl "github.com/gen2brain/raylib-go/raylib"
+	rl "github.com/andygeiss/engine-example/platform/raylib"
 )
 
 // renderingSystem ...
@@ -89,14 +89,14 @@ func (a *renderingSystem) renderEntities(em ecs.EntityManager) {
 		size := e.Get(components.MaskSize).(*components.Size)
 		texture := e.Get(components.MaskTexture)
 		// Draw a bounding box
-		rl.DrawRectangleLines(int32(position.X), int32(position.Y), int32(size.Width), int32(size.Height), rl.Red)
+		// rl.DrawRectangleLines(int32(position.X), int32(position.Y), int32(size.Width), int32(size.Height), rl.Red)
 		// Draw a texture, if available
 		if texture != nil {
 			tx := texture.(*components.Texture)
 			if !tx.Visible {
 				continue
 			}
-			rl.DrawTexture(*tx.Tex, int32(position.X), int32(position.Y), rl.White)
+			rl.DrawTexture(*tx.Tex, position.X, position.Y, 0, 0, size.Width, size.Height, float32(0.0))
 		}
 	}
 }
