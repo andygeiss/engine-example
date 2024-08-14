@@ -1,9 +1,7 @@
 package rl
 
 /*
-#cgo CFLAGS: -I"/System/Volumes/Data/opt/homebrew/Cellar/raylib/5.0/include/"
-#cgo LDFLAGS: -L"/System/Volumes/Data/opt/homebrew/Cellar/raylib/5.0/lib/" -lraylib
-
+#cgo CFLAGS: -Iinclude
 #include "raylib.h"
 #include "raymath.h"
 #include <stdlib.h>

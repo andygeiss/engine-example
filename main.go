@@ -8,6 +8,8 @@ import (
 	"github.com/andygeiss/engine-example/systems"
 )
 
+//go:generate go run platform/build.go
+
 //go:embed resources/**
 var efs embed.FS
 
