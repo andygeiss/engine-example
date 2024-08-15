@@ -16,9 +16,10 @@ func main() {
 		"linux":   "linux_amd64",
 		"windows": "win64_mingw-w64",
 	}
+	prefix := "./platform/raylib/"
+	suffix := fmt.Sprintf("raylib-%s_%s", version, osMap[os.Getenv("GOOS")])
 	mgr := builder.NewManager()
 	for _, fileExt := range extensions {
-		suffix := fmt.Sprintf("raylib-%s_%s", version, osMap[os.Getenv("GOOS")])
 		filename := suffix + fileExt
 		url := urlPrefix + "/" + filename
 		res := mgr.GetArchive(url)
@@ -26,8 +27,8 @@ func main() {
 		switch fileExt {
 		case ".tar.gz":
 			gzr := mgr.NewGzipReader(res.Body)
-			mgr.UnpackGzip(gzr, suffix)
+			mgr.UnpackGzip(gzr, prefix, suffix)
 		}
-		mgr.RemoveUnusedFiles()
+		mgr.RemoveUnusedFiles(prefix)
 	}
 }

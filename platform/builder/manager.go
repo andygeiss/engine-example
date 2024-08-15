@@ -39,16 +39,16 @@ func (a *Manager) NewGzipReader(reader io.Reader) *gzip.Reader {
 	return gzr
 }
 
-func (a *Manager) RemoveUnusedFiles() {
+func (a *Manager) RemoveUnusedFiles(prefix string) {
 	if a.err != nil {
 		return
 	}
-	os.Remove("./platform/raylib/CHANGELOG")
-	os.Remove("./platform/raylib/LICENSE")
-	os.Remove("./platform/raylib/README.md")
+	os.Remove(prefix + "CHANGELOG")
+	os.Remove(prefix + "LICENSE")
+	os.Remove(prefix + "README.md")
 }
 
-func (a *Manager) UnpackGzip(gzr *gzip.Reader, suffix string) {
+func (a *Manager) UnpackGzip(gzr *gzip.Reader, prefix, suffix string) {
 	if a.err != nil {
 		return
 	}
@@ -61,7 +61,7 @@ func (a *Manager) UnpackGzip(gzr *gzip.Reader, suffix string) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		targetFile := "./platform/raylib/" + header.Name
+		targetFile := prefix + header.Name
 		targetFile = strings.ReplaceAll(targetFile, suffix, "")
 		switch header.Typeflag {
 		case tar.TypeDir:
