@@ -9,7 +9,7 @@ import (
 
 func main() {
 	version := "5.0"
-	extensions := []string{".tar.gz"}
+	extensions := []string{".tar.gz", "zip"}
 	urlPrefix := "https://github.com/raysan5/raylib/releases/download/" + version + "/"
 	osMap := map[string]string{
 		"darwin":  "macos",
@@ -28,6 +28,9 @@ func main() {
 		case ".tar.gz":
 			gzr := mgr.NewGzipReader(res.Body)
 			mgr.UnpackGzip(gzr, prefix, suffix)
+		case ".zip":
+			zr := mgr.NewZipReader(res.Body, prefix, suffix)
+			mgr.UnpackZip(zr, prefix, suffix)
 		}
 		mgr.RemoveUnusedFiles(prefix)
 	}
