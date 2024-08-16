@@ -3,7 +3,7 @@ package main
 import (
 	"embed"
 
-	ecs "github.com/andygeiss/ecs/core"
+	"github.com/andygeiss/ecs"
 	"github.com/andygeiss/engine-example/components"
 	"github.com/andygeiss/engine-example/systems"
 )

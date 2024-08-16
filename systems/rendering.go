@@ -3,7 +3,7 @@ package systems
 import (
 	"fmt"
 
-	ecs "github.com/andygeiss/ecs/core"
+	"github.com/andygeiss/ecs"
 	"github.com/andygeiss/engine-example/components"
 	rl "github.com/andygeiss/engine-example/platform/raylib"
 )
