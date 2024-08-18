@@ -6,7 +6,6 @@ import (
 	"github.com/andygeiss/engine-example/systems"
 )
 
-//go:generate go run platform/build.go
 func main() {
 	width, height := 800, 600
 	em := ecs.NewEntityManager()

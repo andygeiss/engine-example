@@ -1,11 +1,11 @@
 package components
 
-import rl "github.com/andygeiss/engine-example/platform/raylib"
+import rl "github.com/gen2brain/raylib-go/raylib"
 
 type Texture struct {
 	Path    string `json:"path"`
 	Visible bool   `json:"visible"`
-	Tex     *rl.Texture
+	Tex     *rl.Texture2D
 }
 
 func (a *Texture) Mask() uint64 {
