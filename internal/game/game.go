@@ -13,27 +13,37 @@ import (
 // starts in the middle of the window, so half of it is the offset.
 const playerSize = 128
 
-// Game is a world and the systems that run it. Build one with New and hand
-// both halves to ecs.NewDefaultEngine.
+// Game is a world and the systems that run it. Build one with New, hand both
+// halves to ecs.NewDefaultEngine, and read Err after the engine stops.
 type Game struct {
 	Entities ecs.EntityManager
 	Systems  ecs.SystemManager
+
+	textures *systems.ResourceSystem
 }
 
-// New builds the world for a window of the given size. Nothing here talks to
-// the graphics card yet — that waits for the engine's Setup.
-func New(width, height int, title string) *Game {
+// New builds the world for a window of the given size, drawn with the sprites
+// embedded in this package. Nothing here talks to the graphics card yet —
+// that waits for the engine's Setup.
+func New(width, height int, title string, verbose bool) *Game {
 	em := NewEntityManager(width, height)
+	textures := systems.NewResourceSystem(em, resourcesFS)
 	sm := ecs.NewSystemManager()
 	sm.Add(
-		systems.NewResourceSystem(em),
+		textures,
 		systems.NewInputSystem(),
 		systems.NewMovementSystem(rl.GetFrameTime),
 		systems.NewCollisionSystem().WithWidth(width).WithHeight(height),
-		systems.NewRenderingSystem().WithWidth(width).WithHeight(height).WithTitle(title),
+		systems.NewRenderingSystem().WithWidth(width).WithHeight(height).WithTitle(title).WithVerbose(verbose),
 		systems.NewStateSystem(),
 	)
-	return &Game{Entities: em, Systems: sm}
+	return &Game{Entities: em, Systems: sm, textures: textures}
+}
+
+// Err reports the first error a system hit, or nil. The engine stops on such
+// an error, so a caller checks this before treating a stop as a clean exit.
+func (g *Game) Err() error {
+	return g.textures.Err()
 }
 
 // NewEntityManager fills a world with the three entities this example has: a
