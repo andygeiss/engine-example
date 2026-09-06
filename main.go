@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+
 	"github.com/andygeiss/ecs"
 	"github.com/andygeiss/engine-example/components"
 	"github.com/andygeiss/engine-example/systems"
@@ -37,5 +39,5 @@ func main() {
 	de := ecs.NewDefaultEngine(em, sm)
 	de.Setup()
 	defer de.Teardown()
-	de.Run()
+	de.Run(context.Background())
 }
