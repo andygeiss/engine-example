@@ -2,12 +2,14 @@ package systems
 
 import (
 	"github.com/andygeiss/ecs"
-	"github.com/andygeiss/engine-example/components"
+	"github.com/andygeiss/engine-example/internal/components"
 )
 
-type stateSystem struct{}
+// StateSystem advances every state that is waiting on a timer, and marks the
+// player as moving while a direction key is down.
+type StateSystem struct{}
 
-func (a *stateSystem) Process(em ecs.EntityManager) (state int) {
+func (a *StateSystem) Process(em ecs.EntityManager) (state int) {
 	controls := em.Get("controls")
 	controlsState := controls.Get(components.MaskState).(*components.State)
 	player := em.Get("player")
@@ -27,10 +29,11 @@ func (a *stateSystem) Process(em ecs.EntityManager) (state int) {
 	return ecs.StateEngineContinue
 }
 
-func (a *stateSystem) Setup() {}
+func (a *StateSystem) Setup() {}
 
-func (a *stateSystem) Teardown() {}
+func (a *StateSystem) Teardown() {}
 
-func NewStateSystem() *stateSystem {
-	return &stateSystem{}
+// NewStateSystem creates a StateSystem.
+func NewStateSystem() *StateSystem {
+	return &StateSystem{}
 }

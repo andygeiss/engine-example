@@ -4,26 +4,22 @@ import (
 	"fmt"
 
 	"github.com/andygeiss/ecs"
-	"github.com/andygeiss/engine-example/components"
+	"github.com/andygeiss/engine-example/internal/components"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-// renderingSystem ...
-type renderingSystem struct {
-	err           error
+// RenderingSystem owns the window: it opens one at Setup, draws a frame per
+// pass, and closes it at Teardown. It stops the engine when the window closes.
+type RenderingSystem struct {
 	title         string
 	width, height int32
 }
 
-func (a *renderingSystem) Error() error {
-	return a.err
-}
-
-func (a *renderingSystem) Setup() {
+func (a *RenderingSystem) Setup() {
 	rl.InitWindow(a.width, a.height, a.title)
 }
 
-func (a *renderingSystem) Process(em ecs.EntityManager) (state int) {
+func (a *RenderingSystem) Process(em ecs.EntityManager) (state int) {
 	// First check if app should stop.
 	if rl.WindowShouldClose() {
 		return ecs.StateEngineStop
@@ -64,26 +60,26 @@ func (a *renderingSystem) Process(em ecs.EntityManager) (state int) {
 	return ecs.StateEngineContinue
 }
 
-func (a *renderingSystem) Teardown() {
+func (a *RenderingSystem) Teardown() {
 	rl.CloseWindow()
 }
 
-func (a *renderingSystem) WithHeight(height int) *renderingSystem {
+func (a *RenderingSystem) WithHeight(height int) *RenderingSystem {
 	a.height = int32(height)
 	return a
 }
 
-func (a *renderingSystem) WithTitle(title string) *renderingSystem {
+func (a *RenderingSystem) WithTitle(title string) *RenderingSystem {
 	a.title = title
 	return a
 }
 
-func (a *renderingSystem) WithWidth(width int) *renderingSystem {
+func (a *RenderingSystem) WithWidth(width int) *RenderingSystem {
 	a.width = int32(width)
 	return a
 }
 
-func (a *renderingSystem) renderEntities(em ecs.EntityManager) {
+func (a *RenderingSystem) renderEntities(em ecs.EntityManager) {
 	for _, e := range em.FilterByMask(components.MaskPosition | components.MaskSize) {
 		position := e.Get(components.MaskPosition).(*components.Position)
 		size := e.Get(components.MaskSize).(*components.Size)
@@ -101,6 +97,6 @@ func (a *renderingSystem) renderEntities(em ecs.EntityManager) {
 	}
 }
 
-func NewRenderingSystem() *renderingSystem {
-	return &renderingSystem{}
+func NewRenderingSystem() *RenderingSystem {
+	return &RenderingSystem{}
 }
