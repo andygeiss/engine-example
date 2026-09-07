@@ -5,7 +5,6 @@
 # Example Engine
 
 [![License](https://img.shields.io/github/license/andygeiss/engine-example)](https://github.com/andygeiss/engine-example/blob/main/LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/andygeiss/engine-example)](https://goreportcard.com/report/github.com/andygeiss/engine-example)
 
 A small game that shows how to build an engine with
 [ecs](https://github.com/andygeiss/ecs). It is for anyone who has read that library's
